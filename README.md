@@ -180,7 +180,7 @@ curl http://<app-service-url>/tasks
    ![Kubectl Get MongoDB Pods](screenshots/kubectl-get-pods-mongodb.png)
 
 6. **MongoDB Pod Running**  
-   ![MongoDB Pod](screenshots/mongodb-pod-running.png)
+   ![MongoDB Pod](screenshots/pod-restart.png)
 
 7. **PVC Bound Output**  
    ![PVC Bound](screenshots/pvc_bound.png)
