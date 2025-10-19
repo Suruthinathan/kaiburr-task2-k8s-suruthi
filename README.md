@@ -171,13 +171,13 @@ curl http://<app-service-url>/tasks
    ![Git Init & Commit](screenshots/git-repo-setup.png)
 
 3. **Docker Images List**  
-   ![Docker Images](screenshots/docker-images.png)
+   ![Docker Images](screenshots/docker images list.png)
 
 4. **Kubernetes Pods Running (App & MongoDB)**  
-   ![Pods Running](screenshots/pods-running.png)
+   ![Pods Running](screenshots/pods_running.png)
 
 5. **Kubectl Get Pods for MongoDB**  
-   ![Kubectl Get MongoDB Pods](screenshots/kubectl-get-mongodb-pods.png)
+   ![Kubectl Get MongoDB Pods](screenshots/kubectl-get-pods-mongodb.png)
 
 6. **MongoDB Pod Running**  
    ![MongoDB Pod](screenshots/mongodb-pod-running.png)
@@ -207,7 +207,7 @@ curl http://<app-service-url>/tasks
     ![Invoke-RestMethod](screenshots/invoke-restmethod.png)
 
 15. **MongoDB Connection Info**  
-    ![MongoDB Connection Info](screenshots/mongodb-connection-info.png)
+    ![MongoDB Connection Info](screenshots/mongodb-connection.png)
 
 16. **PUT Request Creates New Pod**  
-    ![PUT TaskExecution](screenshots/put-taskexecution-new-pod.png)
+    ![PUT TaskExecution](screenshots/PUT-creates pod.png)
