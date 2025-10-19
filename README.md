@@ -1,8 +1,4 @@
-Perfect! Here’s a **complete, ready-to-use `README.md` template for Task 2**, structured similarly to Task 1, but focused on Kubernetes deployment, Docker, MongoDB, and the modified PUT endpoint. You can copy this directly into your repository and then add screenshots in the indicated folders.
 
----
-
-```markdown
 # Kaiburr Task 2 – Kubernetes Deployment of Java REST API
 
 **Candidate Name:** Suruthi  
@@ -222,13 +218,3 @@ Include screenshots showing data persisted after pod restart.
 
 ---
 
-> This README is ready for submission. Screenshots and video (optional) must be added to fully satisfy Task 2 requirements.
-
-```
-
----
-
-If you want, I can **also create the exact folder structure and a sample screenshot folder layout** for Task 2 so you can just drop your screenshots and code, push, and be ready for submission.  
-
-Do you want me to do that next?
-```
