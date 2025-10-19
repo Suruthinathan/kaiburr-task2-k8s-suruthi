@@ -186,7 +186,7 @@ curl http://<app-service-url>/tasks
    ![PVC Bound](screenshots/pvc_bound.png)
 
 8. **MongoDB Persistence - Before Pod Delete**  
-   ![Persistence Before](screenshots/mmongodb-persistence.png)
+   ![MongoDB Persistence - Before Pod Delete](screenshots/mongodb-persistence.png)
 
 9. **MongoDB Persistence - After Pod Restart**  
    ![Persistence After](screenshots/mongodb-persistence-after.png)
@@ -204,10 +204,11 @@ curl http://<app-service-url>/tasks
     ![curl Endpoint](screenshots/curl-get-tasks.png)
 
 14. **PowerShell GET Tasks**  
-    ![Invoke-RestMethod](screenshots/invoke-restmethod.png)
+    ![Invoke-RestMethod](screenshots/InvokeGet-tasks.png)
 
 15. **MongoDB Connection Info**  
-    ![MongoDB Connection Info](screenshots/mongodb-connection.png)
+    ![MongoDB Connection Info](screenshots/mongo-connection.png)
 
 16. **PUT Request Creates New Pod**  
-    ![PUT TaskExecution](screenshots/PUT-creates pod.png)
+    ![PUT TaskExecution](screenshots/PUT-creates-pod.png)
+
