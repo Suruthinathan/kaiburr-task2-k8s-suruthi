@@ -120,19 +120,12 @@ kubectl get svc
 
 Access the service:
 
-* NodePort:
-
-```bash
-kubectl get svc taskapp
-```
-
-Then visit: `http://<minikube-ip>:<nodePort>`
-
-* Or Port Forward:
+Port Forward:
 
 ```bash
 kubectl port-forward svc/taskapp 8080:8080
 curl http://localhost:8080/tasks
+```
 
 ## **Step 5 – PUT TaskExecution with Kubernetes Pod Execution**
 
@@ -150,7 +143,6 @@ String[] command = {"sh","-c","echo Hello from Kubernetes pod"};
 String output = k8sCommandRunner.runCommandInPod("default", "task-"+taskId, command, 60);
 ```
 
-* **Security validation:** Only safe commands are allowed (disallow destructive or malicious commands).
 
 
 ## **Step 6 – Verify MongoDB Persistence**
@@ -170,29 +162,52 @@ curl http://<app-service-url>/tasks
 ```
 
 
-## **Step 7 – Screenshots Folder**
+## 📸 Screenshots for Task 2 - Kubernetes Deployment
 
-* Place all screenshots in `screenshots/` folder.
-* Each screenshot must include:
+1. **VS Code Project & Git Repo Setup**  
+   ![VS Code Setup](screenshots/vs-code-setup.png)
 
-  * System date/time
-  * Your name visible somewhere (terminal, editor, etc.)
+2. **Git Initialization & First Commit**  
+   ![Git Init & Commit](screenshots/git-repo-setup.png)
 
----
+3. **Docker Images List**  
+   ![Docker Images](screenshots/docker-images.png)
 
-## **Step 8 – Notes**
+4. **Kubernetes Pods Running (App & MongoDB)**  
+   ![Pods Running](screenshots/pods-running.png)
 
-* Ensure `MONGO_URI` or `SPRING_DATA_MONGODB_URI` env vars point to the MongoDB service in Kubernetes.
-* Validate all commands executed in pods.
-* Pods run with `restartPolicy: Never` and limited permissions.
-* All PVCs are used for MongoDB persistence.
+5. **Kubectl Get Pods for MongoDB**  
+   ![Kubectl Get MongoDB Pods](screenshots/kubectl-get-mongodb-pods.png)
 
----
+6. **MongoDB Pod Running**  
+   ![MongoDB Pod](screenshots/mongodb-pod-running.png)
 
-## **Step 9 – References**
+7. **PVC Bound Output**  
+   ![PVC Bound](screenshots/pvc-bound.png)
 
-* [Kubernetes Documentation](https://kubernetes.io/docs/)
-* [Fabric8 Kubernetes Client](https://github.com/fabric8io/kubernetes-client)
-* [Docker Documentation](https://docs.docker.com/)
+8. **MongoDB Persistence - Before Pod Delete**  
+   ![Persistence Before](screenshots/mongodb-persistence-before.png)
 
----
+9. **MongoDB Persistence - After Pod Restart**  
+   ![Persistence After](screenshots/mongodb-persistence-after.png)
+
+10. **Kubectl Describe App Pod**  
+    ![Describe Pod](screenshots/taskapp-describe.png)
+
+11. **App Service Port Forward**  
+    ![Port Forward](screenshots/port-forward.png)
+
+12. **App Access via Host**  
+    ![App Access Host](screenshots/app-access-host.png)
+
+13. **curl GET Endpoint Access**  
+    ![curl Endpoint](screenshots/curl-get-tasks.png)
+
+14. **PowerShell GET Tasks**  
+    ![Invoke-RestMethod](screenshots/invoke-restmethod.png)
+
+15. **MongoDB Connection Info**  
+    ![MongoDB Connection Info](screenshots/mongodb-connection-info.png)
+
+16. **PUT Request Creates New Pod**  
+    ![PUT TaskExecution](screenshots/put-taskexecution-new-pod.png)
