@@ -171,7 +171,7 @@ curl http://<app-service-url>/tasks
    ![Git Init & Commit](screenshots/git-repo-setup.png)
 
 3. **Docker Images List**  
-   ![Docker Images](screenshots/docker images list.png)
+   ![Docker Images](screenshots/docker-images-list.png)
 
 4. **Kubernetes Pods Running (App & MongoDB)**  
    ![Pods Running](screenshots/pods_running.png)
@@ -183,22 +183,22 @@ curl http://<app-service-url>/tasks
    ![MongoDB Pod](screenshots/mongodb-pod-running.png)
 
 7. **PVC Bound Output**  
-   ![PVC Bound](screenshots/pvc-bound.png)
+   ![PVC Bound](screenshots/pvc_bound.png)
 
 8. **MongoDB Persistence - Before Pod Delete**  
-   ![Persistence Before](screenshots/mongodb-persistence-before.png)
+   ![Persistence Before](screenshots/mmongodb-persistence.png)
 
 9. **MongoDB Persistence - After Pod Restart**  
    ![Persistence After](screenshots/mongodb-persistence-after.png)
 
 10. **Kubectl Describe App Pod**  
-    ![Describe Pod](screenshots/taskapp-describe.png)
+    ![Describe Pod](screenshots/taskapp-describe-pod.png)
 
 11. **App Service Port Forward**  
     ![Port Forward](screenshots/port-forward.png)
 
 12. **App Access via Host**  
-    ![App Access Host](screenshots/app-access-host.png)
+    ![App Access Host](screenshots/taskapp-access-host.png)
 
 13. **curl GET Endpoint Access**  
     ![curl Endpoint](screenshots/curl-get-tasks.png)
