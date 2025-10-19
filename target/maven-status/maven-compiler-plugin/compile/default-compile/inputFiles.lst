@@ -1,2 +1,8 @@
 C:\Users\DELL\Suruthi\kaiburr-task2-k8s-suruthi\src\main\java\com\kaiburr\task2\Application.java
-C:\Users\DELL\Suruthi\kaiburr-task2-k8s-suruthi\src\main\java\com\kaiburr\task2\TaskController.java
+C:\Users\DELL\Suruthi\kaiburr-task2-k8s-suruthi\src\main\java\com\kaiburr\task2\config\K8sConfig.java
+C:\Users\DELL\Suruthi\kaiburr-task2-k8s-suruthi\src\main\java\com\kaiburr\task2\controller\TaskController.java
+C:\Users\DELL\Suruthi\kaiburr-task2-k8s-suruthi\src\main\java\com\kaiburr\task2\model\Task.java
+C:\Users\DELL\Suruthi\kaiburr-task2-k8s-suruthi\src\main\java\com\kaiburr\task2\model\TaskExecution.java
+C:\Users\DELL\Suruthi\kaiburr-task2-k8s-suruthi\src\main\java\com\kaiburr\task2\repository\TaskRepository.java
+C:\Users\DELL\Suruthi\kaiburr-task2-k8s-suruthi\src\main\java\com\kaiburr\task2\service\TaskService.java
+C:\Users\DELL\Suruthi\kaiburr-task2-k8s-suruthi\src\main\java\com\kaiburr\task2\util\K8sCommandRunner.java

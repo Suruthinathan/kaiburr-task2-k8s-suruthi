@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: taskapp
 spec:
+  type: NodePort  # or LoadBalancer if supported
   selector:
     app: taskapp
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-  type: NodePort
+      nodePort: 30080  # pick any free port 30000-32767

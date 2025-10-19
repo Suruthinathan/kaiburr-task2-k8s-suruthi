@@ -1,12 +1,18 @@
 package com.kaiburr.task2.model;
 
-import lombok.Data;
+import java.time.Instant;
 
-import java.util.Date;
-
-@Data
 public class TaskExecution {
-    private Date startTime;
-    private Date endTime;
+    private Instant startTime;
+    private Instant endTime;
     private String output;
+
+    public Instant getStartTime() { return startTime; }
+    public void setStartTime(Instant startTime) { this.startTime = startTime; }
+
+    public Instant getEndTime() { return endTime; }
+    public void setEndTime(Instant endTime) { this.endTime = endTime; }
+
+    public String getOutput() { return output; }
+    public void setOutput(String output) { this.output = output; }
 }

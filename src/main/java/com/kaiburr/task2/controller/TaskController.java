@@ -2,129 +2,73 @@ package com.kaiburr.task2.controller;
 
 import com.kaiburr.task2.model.Task;
 import com.kaiburr.task2.model.TaskExecution;
-import com.kaiburr.task2.repository.TaskRepository;
-import com.kaiburr.task2.util.K8sCommandRunner;
-import org.springframework.http.HttpStatus;
+import com.kaiburr.task2.service.K8sPodService;
+import com.kaiburr.task2.service.TaskService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
 
-    private final TaskRepository taskRepository;
-    private final K8sCommandRunner k8sRunner;
+    private final TaskService taskService;
+    private final K8sPodService k8sPodService;
 
-    public TaskController(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-        this.k8sRunner = new K8sCommandRunner();
+    public TaskController(TaskService taskService, K8sPodService k8sPodService) {
+        this.taskService = taskService;
+        this.k8sPodService = k8sPodService;
     }
 
-    // ===========================================================
-    // GET /tasks - all tasks or by ID
-    // ===========================================================
+    // Get all tasks
     @GetMapping
-    public List<Task> getTasks(@RequestParam(required = false) String id) {
-        if (id != null) {
-            return taskRepository.findById(id)
-                    .map(List::of)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
-        }
-        return taskRepository.findAll();
+    public List<Task> getAll() {
+        return taskService.findAll();
     }
 
-    // ===========================================================
-    // GET /tasks/search?name=<name> - search by name
-    // ===========================================================
-    @GetMapping("/search")
-    public List<Task> searchTasks(@RequestParam String name) {
-        List<Task> tasks = taskRepository.findByNameContainingIgnoreCase(name);
-        if (tasks.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No tasks found");
-        return tasks;
+    // Get task by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getById(@PathVariable String id) {
+        Task t = taskService.findById(id);
+        return t != null ? ResponseEntity.ok(t) : ResponseEntity.notFound().build();
     }
 
-    // ===========================================================
-    // POST /tasks - create new task
-    // ===========================================================
-    @PostMapping
-    public Task createTask(@RequestBody Task task) {
-        if (!isValidCommand(task.getCommand())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unsafe command detected");
-        }
-        return taskRepository.save(task);
-    }
-
-    // ===========================================================
-    // PUT /tasks - create or update a task
-    // ===========================================================
+    // Create or update task
     @PutMapping
-    public Task createOrUpdateTask(@RequestBody Task task) {
-        if (!isValidCommand(task.getCommand())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unsafe command detected");
-        }
-        return taskRepository.save(task);
+    public Task createOrUpdate(@RequestBody Task task) {
+        return taskService.save(task);
     }
 
-    // ===========================================================
-    // DELETE /tasks/{id} - delete a task by ID
-    // ===========================================================
+    // Delete task
     @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable String id) {
-        if (!taskRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found");
-        }
-        taskRepository.deleteById(id);
+    public void delete(@PathVariable String id) {
+        taskService.deleteById(id);
     }
 
-    // ===========================================================
-    // PUT /tasks/{id}/execution - run command in Kubernetes pod
-    // ===========================================================
-    @PutMapping("/{id}/execution")
-    public TaskExecution executeTask(@PathVariable String id) {
-        Task task = taskRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
+    // Find tasks by name
+    @GetMapping("/find")
+    public ResponseEntity<List<Task>> findByName(@RequestParam String name) {
+        List<Task> list = taskService.findByNameContains(name);
+        return list.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(list);
+    }
 
-        if (!isValidCommand(task.getCommand())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unsafe command detected");
-        }
+    // Execute task — create a Kubernetes pod
+    @PutMapping("/{id}/execution")
+    public ResponseEntity<String> execute(@PathVariable String id) {
+        Task t = taskService.findById(id);
+        if (t == null) return ResponseEntity.notFound().build();
 
         try {
-            TaskExecution execution = new TaskExecution();
-            execution.setStartTime(new Date());
+            // Create a Kubernetes pod with task-id in name
+            String podName = "task-" + id;
+            String podImage = "busybox"; // you can use any image you want
+            k8sPodService.createPod(podName, podImage);
 
-            // Convert to command array for busybox: ["sh", "-c", "<command>"]
-            String[] commandArray = {"sh", "-c", task.getCommand()};
-            String output = k8sRunner.runCommandInPod("default", "task-" + task.getId(), commandArray, 60);
-
-            execution.setEndTime(new Date());
-            execution.setOutput(output);
-
-            task.getTaskExecutions().add(execution);
-            taskRepository.save(task);
-
-            return execution;
+            return ResponseEntity.ok("Kubernetes Pod for task " + id + " created: " + podName);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Execution failed: " + e.getMessage());
+            return ResponseEntity.internalServerError()
+                    .body("Failed to create Kubernetes pod: " + e.getMessage());
         }
-    }
-
-    // ===========================================================
-    // Command safety validation
-    // ===========================================================
-    private boolean isValidCommand(String command) {
-        if (command == null) return false;
-        String lower = command.toLowerCase();
-        return !(lower.contains("rm") ||
-                lower.contains("dd") ||
-                lower.contains(":(){") ||
-                lower.contains("> /dev") ||
-                lower.contains("shutdown") ||
-                lower.contains("reboot") ||
-                lower.contains("wget") ||
-                lower.contains("curl") ||
-                lower.contains("mkfs"));
     }
 }

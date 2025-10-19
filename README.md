@@ -1,7 +1,7 @@
 
 # Kaiburr Task 2 – Kubernetes Deployment of Java REST API
 
-**Candidate Name:** Suruthi  
+**Name:** Suruthi  
 **Date:** 19-Oct-2025  
 
 ---
@@ -29,8 +29,9 @@ kaiburr-task2-k8s-suruthi/
 │   ├── taskapp-deployment.yaml # Java App Deployment
 │   └── taskapp-service.yaml    # Java App Service
 ├── src/                        # Java source code (Task 1)
+├── screenshots/                # Place all screenshots here
 └── README.md
-
+└── pom.xml
 ````
 
 ---
@@ -38,9 +39,9 @@ kaiburr-task2-k8s-suruthi/
 ## **Prerequisites**
 
 - Java 17 installed  
-- Maven or Gradle (depending on your build system)  
+- Maven 
 - Docker installed  
-- Kubernetes cluster (Minikube / Kind / Docker Desktop)  
+- Kubernetes cluster (Docker Desktop)  
 - kubectl configured and pointing to the cluster  
 
 ---
@@ -54,13 +55,7 @@ Navigate to the `src/` folder (or project root if Maven/Gradle is there):
 mvn clean package -DskipTests
 ````
 
-**Gradle:**
-
-```bash
-gradle build -x test
-```
-
-The compiled JAR file will be available in `target/` (Maven) or `build/libs/` (Gradle).
+The compiled JAR file will be available in `target/` (Maven).
 
 ---
 
@@ -69,19 +64,19 @@ The compiled JAR file will be available in `target/` (Maven) or `build/libs/` (G
 From the root directory (where `Dockerfile` is located):
 
 ```bash
-docker build -t yourdockerhubuser/kaiburr-task1:v1 .
+docker build -t suruthi/kaiburr-task2:v1 .
 ```
 
 * **For Minikube:**
 
 ```bash
-minikube image load yourdockerhubuser/kaiburr-task1:v1
+minikube image load suruthi/kaiburr-task2:v1
 ```
 
 * **Optional – Push to Docker Hub:**
 
 ```bash
-docker push yourdockerhubuser/kaiburr-task1:v1
+docker push suruthi/kaiburr-task2:v1
 ```
 
 ---
@@ -91,9 +86,12 @@ docker push yourdockerhubuser/kaiburr-task1:v1
 Apply the manifests in order:
 
 ```bash
-kubectl apply -f k8s/mongodb-pvc.yaml
-kubectl apply -f k8s/mongodb-deployment.yaml
-kubectl apply -f k8s/mongodb-service.yaml
+kubectl apply -f mongodb-pvc.yaml
+kubectl apply -f mongodb-deployment.yaml
+kubectl apply -f mongodb-service.yaml
+kubectl apply -f app-deployment.yaml
+kubectl apply -f app-service.yaml
+
 ```
 
 Verify MongoDB deployment:
@@ -103,10 +101,6 @@ kubectl get pods
 kubectl get pvc
 kubectl get svc
 ```
-
-> Screenshots of the above commands showing system date/time and your name are required.
-
----
 
 ## **Step 4 – Deploy Java Application**
 
@@ -139,11 +133,6 @@ Then visit: `http://<minikube-ip>:<nodePort>`
 ```bash
 kubectl port-forward svc/taskapp 8080:8080
 curl http://localhost:8080/tasks
-```
-
-Include screenshots showing successful response with system date/time and your name.
-
----
 
 ## **Step 5 – PUT TaskExecution with Kubernetes Pod Execution**
 
@@ -163,13 +152,6 @@ String output = k8sCommandRunner.runCommandInPod("default", "task-"+taskId, comm
 
 * **Security validation:** Only safe commands are allowed (disallow destructive or malicious commands).
 
-Include screenshots demonstrating:
-
-* PUT `/tasks/{id}/execution` call via curl or Postman
-* GET `/tasks/{id}` showing TaskExecution stored with pod output
-* System date/time and your name visible in the screenshot
-
----
 
 ## **Step 6 – Verify MongoDB Persistence**
 
@@ -187,9 +169,6 @@ kubectl delete pod -l app=mongodb
 curl http://<app-service-url>/tasks
 ```
 
-Include screenshots showing data persisted after pod restart.
-
----
 
 ## **Step 7 – Screenshots Folder**
 
@@ -217,4 +196,3 @@ Include screenshots showing data persisted after pod restart.
 * [Docker Documentation](https://docs.docker.com/)
 
 ---
-

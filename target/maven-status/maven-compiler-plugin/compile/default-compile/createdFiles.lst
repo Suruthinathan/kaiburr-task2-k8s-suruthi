@@ -1,2 +1,8 @@
+com\kaiburr\task2\repository\TaskRepository.class
+com\kaiburr\task2\config\K8sConfig.class
 com\kaiburr\task2\controller\TaskController.class
 com\kaiburr\task2\Application.class
+com\kaiburr\task2\service\TaskService.class
+com\kaiburr\task2\model\Task.class
+com\kaiburr\task2\model\TaskExecution.class
+com\kaiburr\task2\util\K8sCommandRunner.class
