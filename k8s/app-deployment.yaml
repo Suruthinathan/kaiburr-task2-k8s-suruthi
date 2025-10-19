@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taskapp
+  template:
+    metadata:
+      labels:
+        app: taskapp
+    spec:
+      containers:
+      - name: taskapp
+        image: kaiburr-task1:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_URI
+          value: mongodb://admin:adminpassword@mongodb:27017/tasksdb?authSource=admin
+        - name: SPRING_DATA_MONGODB_URI
+          value: mongodb://admin:adminpassword@mongodb:27017/tasksdb?authSource=admin
