@@ -6,6 +6,19 @@
 **GitHub:** https://github.com/Suruthinathan  
 **Email:** suruthi1425@gmail.com
 
+## **Table of Contents**
+1. [Author](#author)
+2. [Overview](#overview)
+3. [Repository Structure](#repository-structure)
+4. [Prerequisites](#prerequisites)
+5. [Step 1 – Build Java Application](#step-1-–-build-java-application)
+6. [Step 2 – Build Docker Image](#step-2-–-build-docker-image)
+7. [Step 3 – Deploy MongoDB to Kubernetes](#step-3-–-deploy-mongodb-to-kubernetes)
+8. [Step 4 – Deploy Java Application](#step-4-–-deploy-java-application)
+9. [Step 5 – PUT TaskExecution with Kubernetes Pod Execution](#step-5-–-put-taskexecution-with-kubernetes-pod-execution)
+10. [Step 6 – Verify MongoDB Persistence](#step-6-–-verify-mongodb-persistence)
+11. [Screenshots](#screenshots)
+
 ---
 
 ## **Overview**
