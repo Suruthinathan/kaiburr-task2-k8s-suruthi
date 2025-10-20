@@ -1,8 +1,10 @@
 
 # Kaiburr Task 2 – Kubernetes Deployment of Java REST API
 
-**Name:** Suruthi  
-**Date:** 19-Oct-2025  
+## Author
+**Name:** Suruthi M S  
+**GitHub:** https://github.com/Suruthinathan  
+**Email:** suruthi1425@gmail.com
 
 ---
 
